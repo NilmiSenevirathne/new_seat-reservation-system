@@ -1,0 +1,125 @@
+/* Reset and base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f8f9fa;
+  color: #34495e;
+}
+
+/* Main content */
+.main-content {
+  margin-left: 300px;
+  padding: 80px 30px 30px;
+}
+
+/* Dashboard header */
+.main-content h2 {
+  font-weight: 700;
+  color: #32325d;
+  margin-bottom: 20px;
+}
+
+/* Cards */
+.stats-cards {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+.card {
+  background: white;
+  padding: 15px 25px;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px -15px rgb(50 50 93 / 0.1);
+  flex: 1;
+  min-width: 180px;
+}
+.card h5 {
+  font-weight: 700;
+  font-size: 12px;
+  color: #8898aa;
+  letter-spacing: 1.5px;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+.card h3 {
+  font-weight: 700;
+  font-size: 28px;
+  margin-bottom: 5px;
+}
+.card .percent {
+  font-size: 14px;
+}
+.percent.green {
+  color: #2dce89;
+}
+.percent.red {
+  color: #f5365c;
+}
+.percent span {
+  font-weight: 400;
+  font-size: 12px;
+  color: #8898aa;
+  margin-left: 5px;
+}
+
+/* Charts container */
+.charts-container {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+.chart-card {
+  background: white;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 10px 30px -15px rgb(50 50 93 / 0.1);
+}
+.large-chart {
+  flex: 3;
+  min-width: 320px;
+}
+.small-chart {
+  flex: 1;
+  min-width: 220px;
+}
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.chart-header .overview {
+  font-size: 11px;
+  font-weight: 700;
+  color: #8898aa;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+.chart-header h4 {
+  font-weight: 700;
+  font-size: 18px;
+  color: #32325d;
+}
+.btn-group {
+  display: flex;
+  gap: 10px;
+}
+.btn {
+  padding: 5px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 12px;
+  color: #32325d;
+  background: #f7fafc;
+}
+.btn.active {
+  background: #5e72e4;
+  color: white;
+}
