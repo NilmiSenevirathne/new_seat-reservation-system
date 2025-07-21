@@ -1,0 +1,159 @@
+/* style.css */
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: url('../assets/register.jpg') no-repeat center center fixed;
+  background-size: cover;
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Create a blur overlay */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: inherit;
+  background-size: cover;
+  filter: blur(2px);
+  z-index: -1;
+}
+
+.container {
+  background: rgba(255, 255, 255, 0.85); /* Slightly transparent white */
+  width: 400px;
+  max-width: 95%;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  position: relative;
+  filter: blur(-1px);
+  z-index: 1;
+}
+
+
+h2 {
+  font-weight: 700;
+  margin-bottom: 30px;
+  text-align: center;
+  color: #333;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  padding: 14px 15px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+  outline: none;
+  border-color: #4c9af8;
+  box-shadow: 0 0 5px #4c9af8;
+}
+
+.password-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.password-wrapper input {
+  width: 100%;
+  padding-right: 40px; /* space for the icon */
+}
+
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #888;
+  font-size: 18px;
+  user-select: none;
+}
+
+.toggle-password:hover {
+  color: #4c9af8;
+}
+
+
+button {
+  background-color: #4c9af8;
+  color: white;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #3572d4;
+}
+
+p {
+  margin-top: 20px;
+  font-size: 14px;
+  text-align: center;
+  color: #666;
+}
+
+p a {
+  color: #4c9af8;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+p a:hover {
+  text-decoration: underline;
+}
+
+/* Alert message styling */
+.alert {
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.alert-error {
+  background-color: #f8d7da;
+  color: #721c24;
+}
