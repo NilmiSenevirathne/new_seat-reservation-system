@@ -2,9 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\InternSeatController;
-use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\AdminSeatController;
-use App\Http\Controllers\Admin\ReservationController as AdminReservationController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -32,12 +30,10 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/admin/seats/next-seat-number/{location}', [App\Http\Controllers\AdminSeatController::class, 'getNextSeatNumber'])->name('admin.seats.next');
 
 
-Route::middleware(['auth', 'admin'])
-    ->prefix('admin')
-    ->name('admin.')
-    ->group(function () {
-        Route::resource('managereservations', App\Http\Controllers\Admin\ReservationController::class);
-    });
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+    Route::resource('managereservations', App\Http\Controllers\Admin\AdminReservationController::class);
+});
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

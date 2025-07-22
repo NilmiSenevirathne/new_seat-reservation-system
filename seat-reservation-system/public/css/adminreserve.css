@@ -1,44 +1,136 @@
+/* adminreserve.css */
+
+/* General page layout */
+body {
+  font-family: Arial, sans-serif;
+  background: #f8f9fa;
+  color: #333;
+  margin-left: 250px;
+  margin-top: 20px;
+  padding: 0;
+}
+
+.page-wrapper {
+  display: flex;
+  min-height: 100vh;
+  
+}
+
+/* Container for content */
+.container {
+  background: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  flex: 1;
+  align-self:baseline;
+}
+
+/* Heading */
+h1 {
+  margin-bottom: 20px;
+  font-size: 28px;
+  color: #2c3e50;
+}
+
+/* Success message */
+.alert {
+  padding: 15px;
+  border: 1px solid #d4edda;
+  background: #d4edda;
+  color: #155724;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+/* Table styles */
 .table-wrapper {
   overflow-x: auto;
-  max-height: 500px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  
 }
 
 .reservation-table {
   width: 100%;
   border-collapse: collapse;
+  background: #fff;
 }
 
-.reservation-table th, .reservation-table td {
+.reservation-table thead {
+  background: #2c3e50;
+  color: #fff;
+}
+
+.reservation-table th,
+.reservation-table td {
   padding: 12px 15px;
-  border-bottom: 1px solid #eee;
+  border: 1px solid #ddd;
   text-align: left;
 }
 
-.reservation-table th {
-  background: #f0f2f5;
-  position: sticky;
-  top: 0;
-  z-index: 1;
-}
-
 .reservation-table tr:nth-child(even) {
-  background: #fafafa;
+  background: #f2f2f2;
 }
 
 .reservation-table tr:hover {
-  background: #f1f5fd;
+  background: #e9ecef;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .btn-danger {
-  background: #f44336;
-  color: white;
+  background: #e74c3c;
+  color: #fff;
   border: none;
-  padding: 5px 10px;
-  border-radius: 4px;
 }
 
 .btn-danger:hover {
-  background: #d32f2f;
+  background: #c0392b;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .reservation-table thead {
+    display: none;
+  }
+
+  .reservation-table, 
+  .reservation-table tbody, 
+  .reservation-table tr, 
+  .reservation-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .reservation-table tr {
+    margin-bottom: 15px;
+    border-bottom: 2px solid #ddd;
+  }
+
+  .reservation-table td {
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
+  }
+
+  .reservation-table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 15px;
+    width: 45%;
+    padding-left: 15px;
+    font-weight: bold;
+    text-align: left;
+  }
 }
