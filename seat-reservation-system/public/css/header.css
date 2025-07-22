@@ -2,7 +2,7 @@
   .topbar {
     position: fixed;
     top: 0;
-    left: 200px;
+    left: 210px;
     right: 0;
     height: 60px;
     background: #237bef;
@@ -28,30 +28,7 @@
     margin: 0;
   }
 
-  .search-bar {
-    position: relative;
-    flex-grow: 1;
-    max-width: 400px;
-    margin: 0 20px;
-  }
-
-  .search-bar input {
-    width: 100%;
-    padding: 8px 30px 8px 15px;
-    border-radius: 30px;
-    border: none;
-    outline: none;
-    background: rgba(255,255,255,0.9);
-  }
-
-  .search-bar i {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #6c757d;
-    cursor: pointer;
-  }
+  
 
   .user-info {
     display: flex;
