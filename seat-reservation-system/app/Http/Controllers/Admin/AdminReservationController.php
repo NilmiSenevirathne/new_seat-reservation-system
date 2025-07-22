@@ -22,7 +22,16 @@ class AdminReservationController extends Controller
         $query->where('status', $request->status);
     }
 
-    $reservations = $query->paginate(15);
+    if ($request->filled('date')) {
+        $query->where('reservation_date', $request->date);
+    }
+
+    if ($request->filled('status')) {
+        $query->where('status', $request->status);
+    }
+
+
+    $reservations = $query->paginate(10);
 
     return view('admin.managereservations', compact('reservations'));
 }
