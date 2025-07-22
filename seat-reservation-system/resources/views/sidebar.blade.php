@@ -4,7 +4,7 @@
         'admin' => [
             ["route" => "dashboard", "icon" => "fas fa-home", "text" => "Dashboard"],
             ["route" => "admin.seats", "icon" => "fas fa-chair", "text" => "Manage Seats"],
-            ["route" => "admin.reservations.index", "icon" => "fas fa-calendar-alt", "text" => "Manage Reservations"],
+            ["route" => "admin.managereservations.index", "icon" => "fas fa-calendar-alt", "text" => "Manage Reservations"],
             ["route" => "admin.seats", "icon" => "fas fa-chair", "text" => "Reports"],
             ["route" => "logout", "icon" => "fas fa-sign-out-alt", "text" => "Logout"], 
         ],

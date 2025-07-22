@@ -1,0 +1,44 @@
+.table-wrapper {
+  overflow-x: auto;
+  max-height: 500px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.reservation-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.reservation-table th, .reservation-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+.reservation-table th {
+  background: #f0f2f5;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.reservation-table tr:nth-child(even) {
+  background: #fafafa;
+}
+
+.reservation-table tr:hover {
+  background: #f1f5fd;
+}
+
+.btn-danger {
+  background: #f44336;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+.btn-danger:hover {
+  background: #d32f2f;
+}

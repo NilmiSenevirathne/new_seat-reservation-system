@@ -1,70 +1,64 @@
 @extends('layouts.app')
 
 @section('content')
-@include('sidebar')
+<div class="page-wrapper" style="display: flex;">
 
-<div class="admin-container">
-  <div class="main-wrapper">
-    <main class="main-content">
-      <header class="main-header">
-        <h1>Manage Reservations</h1>
-      </header>
+    <link rel="stylesheet" href="{{ asset('css/adminreserve.css') }}">
 
-      @if(session('success_message'))
-      <div class="alert alert-success">
-        {{ session('success_message') }}
-      </div>
-      @endif
+    <div class="container" style="flex-grow: 1; padding-left: 20px;">
+        @include('header')
+        @include('sidebar')
 
-      <section class="content-card">
-        <div class="card-header">
-          <h2><i class="fas fa-calendar-check"></i> All Reservations</h2>
-          <div class="card-actions">
-            <span class="total-reservations">
-              <i class="fas fa-chair"></i> Total: {{ $reservations->count() }} reservations
-            </span>
+        <h1>Manage All Reservations</h1>
+
+        @if(session('success_message'))
+          <div class="alert alert-success">
+            {{ session('success_message') }}
           </div>
-        </div>
+        @endif
 
-        <div class="table-responsive">
-          <table>
+        <div class="table-wrapper">
+          <table class="reservation-table">
             <thead>
               <tr>
-                <th>ID</th>
-                <th>Intern</th>
-                <th>Seat</th>
+                <th>Reservation ID</th>
+                <th>Intern Name</th>
+                <th>Intern Email</th>
+                <th>Seat Number</th>
                 <th>Location</th>
-                <th>Date</th>
+                <th>Reservation Date</th>
                 <th>Time Slot</th>
                 <th>Status</th>
-                <th>Actions</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
-              @foreach($reservations as $reservation)
-              <tr>
-                <td>{{ $reservation->reserve_id }}</td>
-                <td>{{ $reservation->intern->name }}</td>
-                <td>{{ $reservation->seat->seat_num }}</td>
-                <td>{{ $reservation->seat->location }}</td>
-                <td>{{ $reservation->reservation_date }}</td>
-                <td>{{ $reservation->time_slot }}</td>
-                <td>{{ $reservation->status }}</td>
-                <td>
-                  <form method="POST" action="{{ route('admin.reservations.destroy', $reservation->reserve_id) }}" onsubmit="return confirm('Cancel this reservation?');">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit">Cancel</button>
-                  </form>
-                </td>
-              </tr>
-              @endforeach
+              @forelse($reservations as $reservation)
+                <tr>
+                  <td>{{ $reservation->reserve_id }}</td>
+                  <td>{{ $reservation->intern->fname }} {{ $reservation->intern->lname }}</td>
+                  <td>{{ $reservation->intern->email }}</td>
+                  <td>{{ $reservation->seat->seat_num }}</td>
+                  <td>{{ $reservation->seat->location }}</td>
+                  <td>{{ $reservation->reservation_date }}</td>
+                  <td>{{ $reservation->time_slot ?? 'N/A' }}</td>
+                  <td>{{ ucfirst($reservation->status) }}</td>
+                  <td>
+                    <form action="{{ route('admin.reservations.destroy', $reservation->reserve_id) }}" method="POST" onsubmit="return confirm('Are you sure to cancel this reservation?');">
+                      @csrf
+                      @method('DELETE')
+                      <button type="submit" class="btn btn-danger btn-sm">Cancel</button>
+                    </form>
+                  </td>
+                </tr>
+              @empty
+                <tr>
+                  <td colspan="9" class="text-center">No reservations found.</td>
+                </tr>
+              @endforelse
             </tbody>
           </table>
         </div>
-
-      </section>
-    </main>
-  </div>
+    </div>
 </div>
 @endsection

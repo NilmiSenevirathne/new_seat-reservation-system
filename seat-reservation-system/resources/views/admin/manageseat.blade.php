@@ -166,8 +166,8 @@
             </select>
           </div>
           <div class="form-actions">
-            <button type="button" onclick="closeUpdateModal()">Cancel</button>
-            <button type="submit">Update Seat</button>
+            <button type="button"  class="btn btn-cancel"onclick="closeUpdateModal()">Cancel</button>
+            <button type="submit"  class="btn btn-update">Update Seat</button>
           </div>
         </form>
       </div>

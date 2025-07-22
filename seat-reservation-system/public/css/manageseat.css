@@ -89,11 +89,11 @@ body {
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   padding: 20px;
   margin-bottom: 20px;
-  overflow: hidden;
+  
 }
 
 .card-header {
-  display: flex;
+  display:block;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 15px;
@@ -126,7 +126,7 @@ body {
 #seatsTable th, 
 #seatsTable td {
   padding: 12px 18px;
-  text-align: left;
+  text-align: center;
   border-bottom: 1px solid #ddd;
 }
 
@@ -174,7 +174,7 @@ body {
 }
 
 .btn-update {
-  background-color: #2196F3;
+  background-color: #06dada;
   color: white;
 }
 
@@ -183,7 +183,7 @@ body {
 }
 
 .btn-cancel {
-  background-color: #6c757d;
+  background-color: #ff2200;
   color: white;
 }
 
