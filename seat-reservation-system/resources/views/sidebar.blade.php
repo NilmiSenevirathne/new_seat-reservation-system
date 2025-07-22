@@ -6,13 +6,14 @@
             ["route" => "admin.seats.index", "icon" => "fas fa-users-cog", "text" => "Manage Seats"],
             ["route" => "admin.reservations.index", "icon" => "fas fa-calendar-check", "text" => "Reservations"],
             ["route" => "reports.index", "icon" => "fas fa-chart-line", "text" => "Reports"],
-            ["route" => "logout", "icon" => "fas fa-sign-out-alt", "text" => "Logout"],
+            ["route" => "logout", "icon" => "fas fa-sign-out-alt", "text" => "Logout"], 
         ],
         'intern' => [
             ["route" => "dashboard", "icon" => "fas fa-home", "text" => "Dashboard"],
             ["route" => "bookseat", "icon" => "fas fa-chair", "text" => "Book Seats"],
             ["route" => "reservations", "icon" => "fas fa-calendar-alt", "text" => "My Reservations"],
-            ["route" => "logout", "icon" => "fas fa-sign-out-alt", "text" => "Logout"],
+            ["route" => "logout", "icon" => "fas fa-sign-out-alt", "text" => "Logout"], 
+
         ],
     ];
     $links = $sidebars[$role] ?? [];
@@ -31,15 +32,28 @@
     </div>
     
     <ul class="sidebar-menu">
-        @foreach($links as $link)
+    @foreach($links as $link)
+        @if($link['route'] === 'logout')
+            <li class="menu-item">
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none;">
+                    @csrf
+                </form>
+                <a href="#" class="menu-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <i class="{{ $link['icon'] }} menu-icon"></i>
+                    <span class="menu-text">{{ $link['text'] }}</span>
+                </a>
+            </li>
+        @else
             <li class="menu-item {{ request()->routeIs($link['route']) ? 'active' : '' }}">
                 <a href="{{ route($link['route']) }}" class="menu-link">
                     <i class="{{ $link['icon'] }} menu-icon"></i>
                     <span class="menu-text">{{ $link['text'] }}</span>
                 </a>
             </li>
-        @endforeach
-    </ul>
+        @endif
+    @endforeach
+</ul>
+
 </nav>
 
 @push('styles')
