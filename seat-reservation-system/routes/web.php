@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\InternSeatController;
 use App\Http\Controllers\AdminSeatController;
 use App\Http\Controllers\ReportsController;
+use App\Http\Controllers\SeatBookingController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -41,6 +42,11 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/reports/export', [ReportsController::class, 'export'])->name('admin.reports.export');
     });
 });
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('/book-seat', [SeatBookingController::class, 'book'])->name('seat.book');
+});
+
 
 
 Route::middleware('auth')->group(function () {
