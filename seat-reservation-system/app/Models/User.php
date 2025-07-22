@@ -4,6 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\Reservation; // Ensure you import the Reservation model
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
@@ -37,4 +43,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    
+
+    public function reservations(): HasMany
+   {
+    return $this->hasMany(Reservation::class, 'intern_id', 'user_id');
+    // Uses 'intern_id' on reservations table and 'user_id' on users table
+   }
+
 }

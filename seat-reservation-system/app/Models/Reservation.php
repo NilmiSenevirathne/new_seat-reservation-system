@@ -4,18 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Reservation extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'reserve_id';  // If your PK is named reserve_id
-
-    // If your PK is not named 'id', and is an integer and auto-incrementing:
+    protected $primaryKey = 'reserve_id';
     public $incrementing = true;
     protected $keyType = 'int';
 
-    // Fillable columns for mass assignment (optional)
     protected $fillable = [
         'intern_id',
         'seat_id',
@@ -24,16 +22,25 @@ class Reservation extends Model
         'status',
     ];
 
-    public function seat()
-  {
-    return $this->belongsTo(Seat::class, 'seat_id', 'seat_id');
-  }
+    /**
+     * Get the seat that owns the reservation
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function seat(): BelongsTo
+    {
+        return $this->belongsTo(Seat::class, 'seat_id', 'seat_id');
+    }
 
-   public function intern()
-   {
+    /**
+     * Get the intern that owns the reservation
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+   public function intern(): BelongsTo
+{
     return $this->belongsTo(User::class, 'intern_id', 'user_id');
-   }
+    // Uses 'intern_id' on reservations table and 'user_id' on users table
+}
 
-
-    // Add relationships if needed (e.g. to User and Seat models)
 }
