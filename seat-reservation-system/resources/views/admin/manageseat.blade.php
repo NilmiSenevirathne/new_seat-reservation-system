@@ -1,15 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-
 <div class="admin-container">
   <div class="main-wrapper">
 
-    {{-- Include sidebar --}}
     @include('sidebar')
     @include('header')
 
-     {{--style sheet --}}
     <link rel="stylesheet" href="{{ asset('css/manageseat.css') }}">
 
     <main class="main-content">
@@ -22,14 +19,12 @@
         </div>
       </header>
 
-      {{-- Success Message --}}
       @if(session('success_message'))
       <div class="alert alert-success">
         {{ session('success_message') }}
       </div>
       @endif
 
-      {{-- Search and Filter --}}
       <section class="search-filter">
         <div class="search-box">
           <i class="fas fa-search"></i>
@@ -38,15 +33,14 @@
         <div class="filter-options">
           <select id="locationFilter">
             <option value="">All Locations</option>
-            <option value="Window Side">Window Side</option>
-            <option value="Middle">Middle</option>
-            <option value="Front">Front</option>
-            <option value="Back">Back</option>
+            <option value="1st Floor">1st Floor</option>
+            <option value="2nd Floor">2nd Floor</option>
+            <option value="3rd Floor">3rd Floor</option>
+            <option value="4th Floor">4th Floor</option>
           </select>
         </div>
       </section>
 
-      {{-- Seats Table --}}
       <section class="content-card">
         <div class="card-header">
           <h2><i class="fas fa-list"></i> All Seats</h2>
@@ -57,48 +51,50 @@
           </div>
         </div>
         <div class="table-responsive">
-          <table id="seatsTable">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Seat Number</th>
-                <th>Location</th>
-                <th>Status</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              @foreach($seats as $seat)
-              <tr>
-                <td>{{ $seat->seat_id }}</td>
-                <td><span class="seat-badge">{{ $seat->seat_num }}</span></td>
-                <td>{{ $seat->location }}</td>
-                <td><span class="status-badge available">Available</span></td>
-                <td class="action-buttons">
-                  <button class="btn btn-sm btn-edit" 
-                    onclick="openUpdateModal({{ $seat->seat_id }}, '{{ $seat->seat_num }}', '{{ $seat->location }}')">
-                    <i class="fas fa-edit"></i> Edit
-                  </button>
+  <table id="seatsTable">
+  <thead>
+    <tr>
+      <th>Seat Number</th>
+      <th>Location</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach($seats as $seat)
+    <tr>
+      <td>{{ $seat->seat_num }}</td>
+      <td>{{ $seat->location }}</td>
+      <td>
+        <button onclick="openUpdateModal({{ $seat->seat_id }}, '{{ $seat->seat_num }}', '{{ $seat->location }}')" class="btn btn-sm btn-edit">
+          <i class="fas fa-edit"></i> Edit
+        </button>
+        <form method="POST" action="{{ route('admin.seats.destroy', $seat->seat_id) }}" style="display:inline;" onsubmit="return confirm('Are you sure?')">
+          @csrf
+          @method('DELETE')
+          <button type="submit" class="btn btn-sm btn-danger">
+            <i class="fas fa-trash"></i> Delete
+          </button>
+        </form>
+      </td>
+    </tr>
+    @endforeach
 
-                  <form method="POST" action="{{ route('admin.seats.destroy', $seat->seat_id) }}" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this seat?')">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-sm btn-danger">
-                      <i class="fas fa-trash"></i> Delete
-                    </button>
-                  </form>
-                </td>
-              </tr>
-              @endforeach
-            </tbody>
-          </table>
+    <!-- No Results row, hidden by default -->
+    <tr id="noResults" style="display:none;">
+      <td colspan="3" style="text-align:center; color: red;">
+        No seats found for selected filter.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
         </div>
       </section>
     </main>
   </div>
 </div>
 
-{{-- Add Seat Modal --}}
+{{-- ADD Modal --}}
 <div id="addModal" class="modal">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -110,25 +106,30 @@
         <form method="POST" action="{{ route('admin.seats.store') }}">
           @csrf
           <div class="form-group">
-            <label for="location"><i class="fas fa-map-marker-alt"></i> Location</label>
-            <select id="location" name="location" required>
+            <label>Location</label>
+            <select name="location" id="add_location" required>
               <option value="">Select Location</option>
-              <option value="Window Side">Window Side</option>
-              <option value="Middle">Middle</option>
-              <option value="Front">Front</option>
-              <option value="Back">Back</option>
+              
+              <option value="1st Floor">1st Floor</option>
+              <option value="2nd Floor">2nd Floor</option>
+              <option value="3rd Floor">3rd Floor</option>
+              <option value="4th Floor">4th Floor</option>
             </select>
           </div>
+
           <div class="form-group">
-            <label for="seat_num"><i class="fas fa-hashtag"></i> Seat Number</label>
-            <input type="text" id="seat_num" name="seat_num" placeholder="e.g., A1, B2, etc." required>
-            <span id="seat_num_loading" style="display:none;"><i class="fas fa-spinner fa-spin"></i></span>
+            <label>Seat Number</label>
+            <input type="text" id="add_seat_num" name="seat_num" required readonly>
           </div>
+
+          <!-- ✅ Place the limit alert right under Seat Number input -->
+          <div id="seatLimitAlert" style="display:none; color: red; margin-top: 10px;">
+            ⚠️ You have reached the maximum limit of 50 seats for this location!
+          </div>
+
           <div class="form-actions">
-            <button type="button" class="btn btn-secondary" onclick="closeAddModal()">Cancel</button>
-            <button type="submit" class="btn btn-primary">
-              <i class="fas fa-save"></i> Save Seat
-            </button>
+            <button type="button" onclick="closeAddModal()">Cancel</button>
+            <button type="submit" id="addSeatSaveBtn">Save Seat</button>
           </div>
         </form>
       </div>
@@ -136,7 +137,8 @@
   </div>
 </div>
 
-{{-- Update Seat Modal --}}
+
+{{-- UPDATE Modal --}}
 <div id="updateModal" class="modal">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -145,28 +147,27 @@
         <button class="close" onclick="closeUpdateModal()">&times;</button>
       </div>
       <div class="modal-body">
-        <form method="POST" id="updateSeatForm">
+        <form id="updateSeatForm" method="POST">
           @csrf
           @method('PUT')
-          <input type="hidden" name="seat_id" id="update_seat_id">
+          <input type="hidden" id="update_seat_id">
           <div class="form-group">
-            <label for="update_seat_num"><i class="fas fa-hashtag"></i> Seat Number</label>
+            <label>Seat Number</label>
             <input type="text" id="update_seat_num" name="seat_num" required>
           </div>
           <div class="form-group">
-            <label for="update_location"><i class="fas fa-map-marker-alt"></i> Location</label>
+            <label>Location</label>
             <select id="update_location" name="location" required>
-              <option value="Window Side">Window Side</option>
-              <option value="Middle">Middle</option>
-              <option value="Front">Front</option>
-              <option value="Back">Back</option>
+              <option value="">Select Location</option>
+              <option value="1st Floor">1st Floor</option>
+              <option value="2nd Floor">2nd Floor</option>
+              <option value="3rd Floor">3rd Floor</option>
+              <option value="4th Floor">4th Floor</option>
             </select>
           </div>
           <div class="form-actions">
-            <button type="button" class="btn btn-secondary" onclick="closeUpdateModal()">Cancel</button>
-            <button type="submit" class="btn btn-primary">
-              <i class="fas fa-save"></i> Update Seat
-            </button>
+            <button type="button" onclick="closeUpdateModal()">Cancel</button>
+            <button type="submit">Update Seat</button>
           </div>
         </form>
       </div>
@@ -174,7 +175,5 @@
   </div>
 </div>
 
-<script src="../js/manageseat.js"></script>
-
-
+<script src="{{ asset('js/manageseat.js') }}"></script>
 @endsection

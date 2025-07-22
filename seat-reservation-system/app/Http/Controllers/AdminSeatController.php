@@ -2,19 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Seat;
 use Illuminate\Http\Request;
+use App\Models\Seat;
 
 class AdminSeatController extends Controller
 {
-    // Show all seats
-    public function index()
+    public function indexA()
     {
-        $seats = Seat::orderBy('seat_id', 'DESC')->get();
+        $seats = Seat::all();
         return view('admin.manageseat', compact('seats'));
     }
 
-    // Store new seat
     public function store(Request $request)
     {
         $request->validate([
@@ -27,10 +25,9 @@ class AdminSeatController extends Controller
             'location' => $request->location
         ]);
 
-        return redirect()->back()->with('success', 'Seat added successfully!');
+        return redirect()->route('admin.seats')->with('success_message', 'Seat added successfully.');
     }
 
-    // Update seat
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -39,18 +36,38 @@ class AdminSeatController extends Controller
         ]);
 
         $seat = Seat::findOrFail($id);
-        $seat->update([
-            'seat_num' => $request->seat_num,
-            'location' => $request->location
-        ]);
+        $seat->seat_num = $request->seat_num;
+        $seat->location = $request->location;
+        $seat->save();
 
-        return redirect()->back()->with('success', 'Seat updated successfully!');
+        return redirect()->route('admin.seats')->with('success_message', 'Seat updated successfully.');
     }
 
-    // Delete seat
     public function destroy($id)
     {
-        Seat::findOrFail($id)->delete();
-        return redirect()->back()->with('success', 'Seat deleted successfully!');
+        $seat = Seat::findOrFail($id);
+        $seat->delete();
+
+        return redirect()->route('admin.seats')->with('success_message', 'Seat deleted successfully.');
     }
+
+    //get the latest seat number for that location.
+     public function getNextSeatNumber($location) {
+    $count = Seat::where('location', $location)->count();
+
+    if ($count >= 50) {
+        return response()->json([
+            'next_seat_num' => null,
+            'limit_reached' => true
+        ]);
+    }
+
+    $nextNum = $count + 1;
+
+    return response()->json([
+        'next_seat_num' => $nextNum,
+        'limit_reached' => false
+    ]);
+}
+
 }

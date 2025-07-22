@@ -21,20 +21,19 @@ Route::get('/bookseat', [InternSeatController::class, 'show'])
 Route::get('/reservations', [ReservationController::class, 'view'])
     ->name('reservations');
 
-Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
-
 Route::middleware(['auth'])->group(function () {
-    Route::get('/admin/seats', [AdminSeatController::class, 'index'])->name('admin.seats');
+    Route::get('/admin/seats', [AdminSeatController::class, 'indexA'])->name('admin.seats');
     Route::post('/admin/seats', [AdminSeatController::class, 'store'])->name('admin.seats.store');
     Route::put('/admin/seats/{id}', [AdminSeatController::class, 'update'])->name('admin.seats.update');
     Route::delete('/admin/seats/{id}', [AdminSeatController::class, 'destroy'])->name('admin.seats.destroy');
 });
 
-Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
+Route::get('/admin/seats/next-seat-number/{location}', [App\Http\Controllers\AdminSeatController::class, 'getNextSeatNumber'])->name('admin.seats.next');
+
+
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::resource('reservations', App\Http\Controllers\Admin\ReservationController::class);
 });
-
-
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
