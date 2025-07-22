@@ -24,5 +24,16 @@ class Reservation extends Model
         'status',
     ];
 
+    public function seat()
+  {
+    return $this->belongsTo(Seat::class, 'seat_id', 'seat_id');
+  }
+
+   public function intern()
+   {
+    return $this->belongsTo(User::class, 'intern_id', 'user_id');
+   }
+
+
     // Add relationships if needed (e.g. to User and Seat models)
 }

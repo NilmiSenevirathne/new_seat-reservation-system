@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\InternSeatController;
+use App\Http\Controllers\ReservationController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -15,6 +16,11 @@ Route::get('/dashboard', function () {
 Route::get('/bookseat', [InternSeatController::class, 'show'])
     ->middleware(['auth', 'verified'])
     ->name('bookseat');
+
+Route::get('/reservations', [ReservationController::class, 'view'])
+    ->name('reservations');
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
