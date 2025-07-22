@@ -5,7 +5,7 @@
             ["route" => "dashboard", "icon" => "fas fa-home", "text" => "Dashboard"],
             ["route" => "admin.seats", "icon" => "fas fa-chair", "text" => "Manage Seats"],
             ["route" => "admin.managereservations.index", "icon" => "fas fa-calendar-alt", "text" => "Manage Reservations"],
-            ["route" => "admin.seats", "icon" => "fas fa-chair", "text" => "Reports"],
+            ["route" => "admin.reports", "icon" => "fas fa-book", "text" => "Reports"],
             ["route" => "logout", "icon" => "fas fa-sign-out-alt", "text" => "Logout"], 
         ],
         'intern' => [
