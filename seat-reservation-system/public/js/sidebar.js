@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // Fallback: highlight active based on URL
+  // Highlight active link
   const currentUrl = window.location.href;
   const links = document.querySelectorAll('.menu-link');
   links.forEach(link => {
