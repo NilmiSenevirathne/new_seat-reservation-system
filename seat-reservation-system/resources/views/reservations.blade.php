@@ -15,6 +15,7 @@
         <div class="reservations-wrapper-vertical">
             <div class="reservation-section">
                 <h2>Active Reservations</h2>
+            <div class="table-wrapper" >
                 <table id="active-reservations" class="reservation-table">
                     <thead>
                         <tr>
@@ -44,6 +45,7 @@
                     @endforelse
                     </tbody>
                 </table>
+             </div>
             </div>
 
             <div class="reservation-section">
