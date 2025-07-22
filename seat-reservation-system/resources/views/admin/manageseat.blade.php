@@ -50,8 +50,8 @@
             </span>
           </div>
         </div>
-        <div class="table-responsive">
-  <table id="seatsTable">
+        <div class="table-responsive table-scroll">
+          <table id="seatsTable">
   <thead>
     <tr>
       <th>Seat Number</th>
@@ -128,8 +128,8 @@
           </div>
 
           <div class="form-actions">
-            <button type="button" onclick="closeAddModal()">Cancel</button>
-            <button type="submit" id="addSeatSaveBtn">Save Seat</button>
+            <button type="button"   class="btn btn-cancel"  onclick="closeAddModal()">Cancel</button>
+            <button type="submit" class="btn btn-add"  id="addSeatSaveBtn">Save Seat</button>
           </div>
         </form>
       </div>
