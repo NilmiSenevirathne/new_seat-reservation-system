@@ -20,6 +20,9 @@ Route::get('/bookseat', [InternSeatController::class, 'show'])
 Route::get('/reservations', [ReservationController::class, 'view'])
     ->name('reservations');
 
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+
 
 
 Route::middleware('auth')->group(function () {
