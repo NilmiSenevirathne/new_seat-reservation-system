@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\InternSeatController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\AdminSeatController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -22,7 +23,12 @@ Route::get('/reservations', [ReservationController::class, 'view'])
 
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
-
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admin/seats', [AdminSeatController::class, 'index'])->name('admin.seats');
+    Route::post('/admin/seats', [AdminSeatController::class, 'store'])->name('admin.seats.store');
+    Route::put('/admin/seats/{id}', [AdminSeatController::class, 'update'])->name('admin.seats.update');
+    Route::delete('/admin/seats/{id}', [AdminSeatController::class, 'destroy'])->name('admin.seats.destroy');
+});
 
 
 Route::middleware('auth')->group(function () {

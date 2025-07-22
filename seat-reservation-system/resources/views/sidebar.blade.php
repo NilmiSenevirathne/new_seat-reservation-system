@@ -3,9 +3,7 @@
     $sidebars = [
         'admin' => [
             ["route" => "dashboard", "icon" => "fas fa-home", "text" => "Dashboard"],
-            ["route" => "admin.seats.index", "icon" => "fas fa-users-cog", "text" => "Manage Seats"],
-            ["route" => "admin.reservations.index", "icon" => "fas fa-calendar-check", "text" => "Reservations"],
-            ["route" => "reports.index", "icon" => "fas fa-chart-line", "text" => "Reports"],
+            ["route" => "admin.seats", "icon" => "fas fa-chair", "text" => "Manage Seats"],
             ["route" => "logout", "icon" => "fas fa-sign-out-alt", "text" => "Logout"], 
         ],
         'intern' => [
