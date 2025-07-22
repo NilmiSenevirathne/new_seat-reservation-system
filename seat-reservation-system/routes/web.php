@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InternSeatController;
 use App\Http\Controllers\AdminSeatController;
 use App\Http\Controllers\ReportsController;
@@ -12,9 +13,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
+
 
 Route::get('/bookseat', [InternSeatController::class, 'show'])
     ->middleware(['auth', 'verified'])
