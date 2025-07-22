@@ -19,7 +19,7 @@ body {
 
 .main-wrapper {
   flex: 1;
-  margin-left: 50px;
+  margin-left: -10px;
   padding-top: 60px;
 }
 
@@ -44,6 +44,46 @@ body {
   display: flex;
   gap: 10px;
 }
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 9999;
+  left: 0; top: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-dialog {
+  background: #fff;
+  border-radius: 6px;
+  max-width: 500px;
+  width: 90%;
+  padding: 20px;
+}
+
+.modal-content {
+  position: relative;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h3 {
+  margin: 0;
+}
+
+.modal-header .close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
 
 /* ===== Search and Filter ===== */
 .search-filter {
