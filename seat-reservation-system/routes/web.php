@@ -30,6 +30,11 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/admin/seats/{id}', [AdminSeatController::class, 'destroy'])->name('admin.seats.destroy');
 });
 
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
+    Route::resource('reservations', App\Http\Controllers\Admin\ReservationController::class);
+});
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
