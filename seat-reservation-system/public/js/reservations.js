@@ -15,9 +15,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const formData = new FormData();
         formData.append('cancel_id', reservationId);
 
-        // Use current page URL or adjust path to your cancellation PHP handler
-        const response = await fetch(window.location.href, {
+        const response = await fetch(cancelUrl, {
           method: 'POST',
+          headers: {
+            'X-CSRF-TOKEN': csrfToken
+          },
           body: formData
         });
 

@@ -3,10 +3,7 @@
 @section('content')
 <div class="page-wrapper" style="display: flex;">
 
-
-    
-
-    {{--style sheet --}}
+    {{-- Style sheet --}}
     <link rel="stylesheet" href="{{ asset('css/reservations.css') }}">
 
     {{-- Main content area --}}
@@ -36,8 +33,8 @@
                             <td>{{ $reservation->reservation_date }}</td>
                             <td class="status">{{ ucfirst($reservation->status) }}</td>
                             <td>
-                                <a href="#" 
-                                   class="cancel-btn" 
+                                <a href="#"
+                                   class="cancel-btn"
                                    data-reservation-id="{{ $reservation->reserve_id }}"
                                 >Cancel</a>
                             </td>
@@ -79,6 +76,11 @@
         </div>
     </div>
 </div>
+
+<script>
+    const cancelUrl = "{{ route('reservations.cancel') }}";
+    const csrfToken = "{{ csrf_token() }}";
+</script>
 
 <script src="{{ asset('js/reservations.js') }}"></script>
 @endsection

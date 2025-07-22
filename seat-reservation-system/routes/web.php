@@ -5,6 +5,7 @@ use App\Http\Controllers\InternSeatController;
 use App\Http\Controllers\AdminSeatController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\SeatBookingController;
+use App\Http\Controllers\ReservationController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -46,6 +47,11 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::post('/book-seat', [SeatBookingController::class, 'book'])->name('seat.book');
 });
+
+
+Route::get('/reservations', [ReservationController::class, 'view'])->name('reservations.index');
+Route::post('/reservations/cancel', [ReservationController::class, 'cancel'])->name('reservations.cancel');
+
 
 
 
