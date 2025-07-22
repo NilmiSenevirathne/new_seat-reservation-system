@@ -38,39 +38,47 @@
     </form>
   </div>
 
-  <!-- Show all seats grouped by floor -->
+ @php
+  $floors = ['1st Floor', '2nd Floor', '3rd Floor', '4th Floor'];
+@endphp
+
+@forelse($floors as $floor)
   @php
-    $floors = ['1st Floor', '2nd Floor', '3rd Floor', '4th Floor'];
+    $floorSeats = $seats->where('location', $floor);
   @endphp
 
-  @forelse($floors as $floor)
-    @php
-      $floorSeats = $seats->where('location', $floor);
-    @endphp
+  @if ($selected_location == '' || $selected_location == $floor)
+    <div class="seats-layout">
+      <div class="seat-block">
+        <div class="block-title">{{ $floor }}</div>
+        <div class="grid">
+          @forelse ($floorSeats as $seat)
+            @php
+              $isBooked = $seat->reservations->where('reservation_date', $selected_date)
+                             ->where('status', 'active')->isNotEmpty();
+            @endphp
 
-    @if ($selected_location == '' || $selected_location == $floor)
-      <div class="seats-layout">
-        <div class="seat-block">
-          <div class="block-title">{{ $floor }}</div>
-          <div class="grid">
-            @foreach ($floorSeats as $seat)
-              <div class="seat {{ $seat->status == 'available' ? 'available' : 'unavailable' }}"
-                   data-seat-id="{{ $seat->seat_id }}"
-                   data-seat-num="{{ $seat->seat_num }}">
-                {{ $seat->seat_num }}
-              </div>
-            @endforeach
-          </div>
+            <div class="seat {{ $isBooked ? 'unavailable' : 'available' }}"
+                 data-seat-id="{{ $seat->seat_id }}"
+                 data-seat-num="{{ $seat->seat_num }}"
+                 style="{{ $isBooked ? 'pointer-events: none; cursor: not-allowed;' : '' }}">
+              {{ $seat->seat_num }}
+            </div>
+          @empty
+            <p>No seats found for this floor.</p>
+          @endforelse
         </div>
       </div>
-    @endif
-
-  @empty
-    <div class="no-seats">
-      <h3>No seats found</h3>
-      <p>Please try a different floor or date.</p>
     </div>
-  @endforelse
+  @endif
+@empty
+  <div class="no-seats">
+    <h3>No seats found</h3>
+    <p>Please try a different floor or date.</p>
+  </div>
+@endforelse
+
+
 </div>
 
 <!-- POPUP -->
@@ -87,7 +95,6 @@
   const csrfToken = "{{ csrf_token() }}";
 </script>
 <script src="{{ asset('js/intern_book_seats.js') }}"></script>
-
 
 </body>
 </html>
