@@ -15,6 +15,8 @@
             text-align: center;
             margin-bottom: 30px;
             color: #004085;
+            font-weight: 700;
+            font-size: 2.5em;
         }
         .success-msg {
             background-color: #d4edda;
@@ -58,7 +60,7 @@
             text-align: left;
         }
         table.reservation-table th {
-            background-color: #0e64bb;
+            background-color: #6e7882;
             color: white;
             font-weight: 600;
         }
