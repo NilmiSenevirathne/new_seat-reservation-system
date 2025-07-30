@@ -93,7 +93,7 @@ h1 {
 
 .btn-danger {
   background-color: #dc3545;
-  color: white;
+  color: rgb(228, 58, 58);
 }
 
 .btn-danger:hover {
@@ -168,7 +168,7 @@ div[style*="margin-bottom: 15px;"] {
 }
 
 .reservation-table thead tr {
-  background-color: #9b9d9f;
+  background-color: #aeafb0;
   color: white;
   text-align: left;
   font-weight: 700;
