@@ -86,6 +86,15 @@
 <div class="popup" id="popup">
   <h2>Book Your Seat</h2>
   <p id="popup-seat"></p>
+
+  <!-- Add time slot selector -->
+  <label for="time-slot">Select Time Slot:</label>
+  <select id="time-slot" name="time_slot">
+    <option value="08:30-10:30">08:30 - 10:30</option>
+    <option value="08:30-12:30">08:30-12:30</option>
+    <option value="08:30-16:30">08:30-16:30</option>
+  </select>
+
   <button id="confirm-booking" class="btn btn-ok">Confirm</button>
   <button id="close-popup" class="btn btn-close">Close</button>
 </div>
