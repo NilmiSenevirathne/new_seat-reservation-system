@@ -11,7 +11,7 @@
         'intern' => [
             ["route" => "dashboard", "icon" => "fas fa-home", "text" => "Dashboard"],
             ["route" => "bookseat", "icon" => "fas fa-chair", "text" => "Book Seats"],
-            ["route" => "reservations.index", "icon" => "fas fa-calendar-alt", "text" => "My Reservations"], // ✅ FIXED
+            ["route" => "reservations.index", "icon" => "fas fa-calendar-alt", "text" => "My Reservations"],
             ["route" => "logout", "icon" => "fas fa-sign-out-alt", "text" => "Logout"], 
 
         ],

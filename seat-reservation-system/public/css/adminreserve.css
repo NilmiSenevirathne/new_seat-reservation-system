@@ -1,236 +1,311 @@
-/* ====== General ====== */
-body {
-  font-family: 'Segoe UI', Roboto, sans-serif;
-  background: #f4f6f8;
-  margin-top: 60px;
-  margin-left: 200px;
+
+* {
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
   padding: 0;
+}
+
+.page-wrapper {
+  min-height: 100vh;
+  background: #f5f7fa;
   color: #333;
 }
 
-h1 {
-  text-align: center;
-  color: #004085;
-  margin-bottom: 30px;
-  font-weight: 700;
-  font-size: 2.4rem;
-}
-
+/* Container */
 .container {
   max-width: 1000px;
-  margin: 30px auto;
-  padding: 0 20px;
+  margin-left: 300px;
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px 60px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
+/* Heading */
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #222;
+}
+
+/* Success message */
 .success-msg {
-  background: #d4edda;
+  background-color: #d4edda;
   color: #155724;
   border: 1px solid #c3e6cb;
-  padding: 12px 20px;
-  border-radius: 6px;
-  margin-bottom: 20px;
-  text-align: center;
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin-bottom: 15px;
   font-weight: 600;
 }
 
-/* ====== Filter Box ====== */
+/* Buttons */
+.btn {
+  display: inline-block;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 5px;
+  border: none;
+  transition: background-color 0.3s ease;
+  user-select: none;
+  padding: 8px 14px;
+  font-size: 0.9rem;
+}
+
+.btn-success {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #0069d9;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+.btn-warning {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.btn-warning:hover {
+  background-color: #e0a800;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+.btn-sm {
+  padding: 5px 10px;
+  font-size: 0.8rem;
+}
+
+/* Create button container */
+div[style*="margin-bottom: 15px;"] {
+  margin-bottom: 25px;
+}
+
+/* Filter Form */
 .filter-container {
-  background: #ffffff;
-  border-radius: 8px;
-  padding: 20px 25px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  margin-bottom: 30px;
+  margin-bottom: 25px;
+  background: #fafafa;
+  padding: 15px 20px;
+  border-radius: 6px;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
 }
 
 .filter-form {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 15px;
+  align-items: flex-end;
 }
 
 .filter-group {
   display: flex;
   flex-direction: column;
-  flex: 1 1 200px;
+  flex: 1 1 180px;
 }
 
 .filter-group label {
+  font-weight: 600;
   margin-bottom: 6px;
-  font-weight: 600;
-  color: #333;
-}
-
-.filter-group input,
-.filter-group select {
-  padding: 8px 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.filter-group button,
-.filter-group a {
-  margin-top: 26px;
-}
-
-/* ====== Buttons ====== */
-.btn {
-  display: inline-block;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  border-radius: 4px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.2s ease;
-}
-
-.btn-primary {
-  background: #007bff;
-  color: #fff;
-}
-
-.btn-primary:hover {
-  background: #0056b3;
-}
-
-.btn-secondary {
-  background: #6c757d;
-  color: #fff;
-}
-
-.btn-secondary:hover {
-  background: #5a6268;
-}
-
-.btn-danger {
-  background: #dc3545;
-  color: #fff;
-}
-
-.btn-danger:hover {
-  background: #c82333;
-}
-
-.btn-sm {
-  padding: 6px 12px;
   font-size: 0.9rem;
 }
 
-/* ====== Table ====== */
-.table-wrapper {
-  overflow-x: auto;
-  border-radius: 8px;
-  background: #fff;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+.filter-group input[type="date"],
+.filter-group select {
+  padding: 8px 10px;
+  border: 1.5px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
 }
 
+.filter-group input[type="date"]:focus,
+.filter-group select:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+/* Table wrapper */
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: 6px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.03);
+}
+
+/* Reservation Table */
 .reservation-table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 850px;
+  min-width: 700px;
+}
+
+.reservation-table thead tr {
+  background-color: #9b9d9f;
+  color: white;
+  text-align: left;
+  font-weight: 700;
+  font-size: 0.95rem;
 }
 
 .reservation-table th,
 .reservation-table td {
-  border: 1px solid #ddd;
-  padding: 12px 16px;
-  text-align: left;
+  padding: 12px 15px;
+  border-bottom: 1px solid #ddd;
+  vertical-align: middle;
+  font-size: 0.9rem;
 }
 
-.reservation-table th {
-  background: #979da3;
-  color: #fff;
+.reservation-table tbody tr:hover {
+  background-color: #f1f7ff;
+}
+
+.text-center {
+  text-align: center;
+  color: #888;
+  font-style: italic;
+}
+
+/* Modal styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.6);
+  transition: opacity 0.3s ease;
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 8% auto;
+  padding: 25px 30px;
+  border-radius: 8px;
+  width: 400px;
+  max-width: 95%;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  right: 15px;
+  top: 12px;
+  font-size: 28px;
+  font-weight: 700;
+  color: #333;
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.3s ease;
+}
+
+.close:hover {
+  color: #007bff;
+}
+
+/* Modal form */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
   font-weight: 600;
+  margin-bottom: 6px;
+  font-size: 1rem;
 }
 
-.reservation-table tr:nth-child(even) {
-  background: #f9fafb;
-}
-
-.reservation-table tr:hover {
-  background: #f1f5f9;
-}
-
-.text-muted {
-  color: #777;
-}
-
-/* ====== Pagination ====== */
-.pagination-wrapper {
-  margin-top: 25px;
-  display: flex;
-  justify-content: center;
-}
-
-.pagination-wrapper .pagination {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-}
-
-.pagination-wrapper .pagination li {
-  list-style: none;
-}
-
-.pagination-wrapper .pagination li a,
-.pagination-wrapper .pagination li span {
-  display: inline-block;
+.form-control {
+  width: 100%;
   padding: 8px 12px;
-  border: 1px solid #ddd;
-  color: #0e64bb;
-  text-decoration: none;
-  border-radius: 4px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1.5px solid #ccc;
+  transition: border-color 0.3s ease;
 }
 
-.pagination-wrapper .pagination li.active span {
-  background: #0e64bb;
-  color: #fff;
-  border-color: #0e64bb;
+.form-control:focus {
+  outline: none;
+  border-color: #007bff;
 }
 
-.pagination-wrapper .pagination li a:hover {
-  background: #0e64bb;
-  color: #fff;
+/* Button in modal */
+button.btn-primary {
+  width: 100%;
+  padding: 10px;
+  font-size: 1.1rem;
+  border-radius: 6px;
+  font-weight: 700;
 }
 
-/* ====== Responsive ====== */
-@media (max-width: 768px) {
+/* Responsive */
+@media (max-width: 1024px) {
   .filter-form {
     flex-direction: column;
   }
 
   .filter-group {
-    width: 100%;
+    width: 100% !important;
   }
 
+  .container {
+    padding: 15px 20px;
+  }
+}
+
+@media (max-width: 768px) {
   .reservation-table {
-    font-size: 0.9rem;
+    min-width: 100%;
+    font-size: 0.85rem;
   }
 
-  .reservation-table th,
-  .reservation-table td {
-    padding: 10px 12px;
+  .reservation-table th, .reservation-table td {
+    padding: 8px 10px;
   }
 }
 
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.5rem;
+  }
 
-/* Make sure buttons stay on same line on large screens */
-@media (max-width: 768px) {
-  .filter-form {
-    flex-direction: column;
-    align-items: stretch;
+  .btn {
+    font-size: 0.85rem;
+    padding: 6px 12px;
   }
-  .filter-group {
-    width: 100%;
-  }
-  .filter-group input,
-  .filter-group select {
-    width: 100%;
-  }
-  .filter-group button,
-  .filter-group a {
-    width: 100%;
-    margin-left: 0;
-    margin-top: 10px;
+
+  .modal-content {
+    width: 90%;
+    margin: 15% auto;
+    padding: 20px;
   }
 }
