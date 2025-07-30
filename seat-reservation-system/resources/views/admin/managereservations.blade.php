@@ -33,7 +33,7 @@
                     <label for="status">Filter by Status:</label>
                     <select id="status" name="status">
                         <option value="">All Statuses</option>
-                        <option value="canceled" {{ request('status') == 'canceled' ? 'selected' : '' }}>Canceled</option>
+                        <option value="cancelled" {{ request('status') == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
                         <option value="active" {{ request('status') == 'active' ? 'selected' : '' }}>Active</option>
                     </select>
                 </div>
@@ -116,7 +116,7 @@
                 <label for="edit_status">Status:</label>
                 <select name="status" id="edit_status" class="form-control">
                     <option value="active">Active</option>
-                    <option value="canceled">Canceled</option>
+                    <option value="cancelled">Cancelled</option>
                 </select>
             </div>
 

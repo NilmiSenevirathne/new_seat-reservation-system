@@ -63,20 +63,21 @@ class AdminReservationController extends Controller
     }
 
     // Update reservation from AJAX request
-    public function update(Request $request, $id)
+   public function update(Request $request, $id)
     {
-        $request->validate([
-            'reservation_date' => 'required|date',
-            'status' => 'required|in:active,canceled',
-        ]);
+    $request->validate([
+        'reservation_date' => 'required|date',
+        'status' => 'required|string|in:active,cancelled',
+    ]);
 
-        $reservation = Reservation::findOrFail($id);
-        $reservation->reservation_date = $request->reservation_date;
-        $reservation->status = $request->status;
-        $reservation->save();
+    $reservation = Reservation::findOrFail($id);
+    $reservation->reservation_date = $request->reservation_date;
+    $reservation->status = $request->status; 
+    $reservation->save();
 
-        return response()->json(['message' => 'Reservation updated successfully']);
-    }
+    return redirect()->route('admin.managereservations.index')
+                     ->with('success_message', 'Reservation updated successfully.');}
+
 
     public function destroy($id)
     {
