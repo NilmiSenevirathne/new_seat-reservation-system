@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const confirmBtn = document.getElementById('confirm-booking');
   const closeBtn = document.getElementById('close-popup');
   const dateInput = document.getElementById('date');
+  const timeSlotSelect = document.getElementById('time-slot'); // Time slot selector in popup
+
   let selectedSeatId = null;
   let selectedSeatNum = null;
 
@@ -15,6 +17,12 @@ document.addEventListener('DOMContentLoaded', function () {
       selectedSeatNum = this.dataset.seatNum;
 
       popupSeat.textContent = `Seat: ${selectedSeatNum}`;
+
+      // Reset time slot selection on popup open
+      if (timeSlotSelect) {
+        timeSlotSelect.value = '';
+      }
+
       overlay.style.display = 'block';
       popup.style.display = 'block';
     });
@@ -23,15 +31,19 @@ document.addEventListener('DOMContentLoaded', function () {
   confirmBtn.addEventListener('click', function () {
     if (!selectedSeatId) return;
 
-    // Validate date input
     const selectedDate = dateInput.value;
     if (!selectedDate) {
       alert('Please select a valid date.');
       return;
     }
 
-    if (confirm(`Are you sure you want to book seat ${selectedSeatNum} for ${selectedDate}?`)) {
-      // Disable confirm button to prevent multiple clicks
+    const selectedTimeSlot = timeSlotSelect ? timeSlotSelect.value : '';
+    if (!selectedTimeSlot) {
+      alert('Please select a time slot.');
+      return;
+    }
+
+    if (confirm(`Are you sure you want to book seat ${selectedSeatNum} for ${selectedDate} at ${selectedTimeSlot}?`)) {
       confirmBtn.disabled = true;
 
       fetch(bookingUrl, {
@@ -43,31 +55,31 @@ document.addEventListener('DOMContentLoaded', function () {
         },
         body: JSON.stringify({
           seat_id: selectedSeatId,
-          date: selectedDate
+          date: selectedDate,
+          time_slot: selectedTimeSlot
         })
       })
-        .then(async response => {
-          if (!response.ok) {
-            const text = await response.text();
-            console.error('Server error:', text);
-            throw new Error('Server returned an error.');
-          }
-          return response.json();
-        })
-        .then(data => {
-          alert(data.message);
-          if (data.success) {
-            window.location.reload();
-          } else {
-            // Re-enable button if booking failed, so user can retry
-            confirmBtn.disabled = false;
-          }
-        })
-        .catch(error => {
-          console.error('Booking failed:', error);
-          alert('An error occurred while booking.');
+      .then(async response => {
+        if (!response.ok) {
+          const text = await response.text();
+          console.error('Server error:', text);
+          throw new Error('Server returned an error.');
+        }
+        return response.json();
+      })
+      .then(data => {
+        alert(data.message);
+        if (data.success) {
+          window.location.reload();
+        } else {
           confirmBtn.disabled = false;
-        });
+        }
+      })
+      .catch(error => {
+        console.error('Booking failed:', error);
+        alert('An error occurred while booking.');
+        confirmBtn.disabled = false;
+      });
 
       closePopup();
     }
@@ -79,8 +91,11 @@ document.addEventListener('DOMContentLoaded', function () {
   function closePopup() {
     overlay.style.display = 'none';
     popup.style.display = 'none';
-    confirmBtn.disabled = false;  // Reset confirm button state
+    confirmBtn.disabled = false;
     selectedSeatId = null;
     selectedSeatNum = null;
+    if (timeSlotSelect) {
+      timeSlotSelect.value = '';
+    }
   }
 });

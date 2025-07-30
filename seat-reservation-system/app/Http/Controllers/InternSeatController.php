@@ -11,10 +11,15 @@ class InternSeatController extends Controller
     {
         $selected_date = $request->query('date', now()->format('Y-m-d'));
         $selected_location = $request->query('location', '');
+        $selected_time_slot = $request->query('time_slot', ''); // New time slot param
 
-        $seats = Seat::whereDoesntHave('reservations', function ($query) use ($selected_date) {
+        $seats = Seat::whereDoesntHave('reservations', function ($query) use ($selected_date, $selected_time_slot) {
             $query->where('reservation_date', $selected_date)
                   ->where('status', 'active');
+
+            if (!empty($selected_time_slot)) {
+                $query->where('time_slot', $selected_time_slot);
+            }
         });
 
         if (!empty($selected_location)) {
@@ -27,6 +32,7 @@ class InternSeatController extends Controller
             'seats' => $seats,
             'selected_date' => $selected_date,
             'selected_location' => $selected_location,
+            'selected_time_slot' => $selected_time_slot,
         ]);
     }
 }
